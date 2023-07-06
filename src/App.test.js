@@ -5,20 +5,24 @@ import App from './App';
 
 describe('Tests for Login Form',()=>{
     it('submitting the form calls onSubmit with username and password', () => {
-        // create a variable called "submittedData" and a handleSubmit function that
-        // accepts the data and assigns submittedData to the data that was submitted
-        // Hint: if you need a hand, here's what the handleSubmit function should do:
-        // const handleSubmit = data => (submittedData = data)
-        //
-        // render the login with your handleSubmit function as the onSubmit prop
-        //
-        // get the username and password fields via `getByLabelText`
-        // use `await userEvent.type...` to change the username and password fields to
-        //    whatever you want
-        //
-        // click on the button with the text "Submit"
-        //
-        // assert that submittedData is correct
-        // Hint: use `toEqual` from Jest: 📜 https://jestjs.io/docs/en/expect#toequalvalue
-      })
+      const inputProps = {
+        username: 'anurag',
+        password: '123'
+      }
+      let submittedData;
+      const handleSubmit = data => (submittedData = data)
+      render(<App onSubmit={handleSubmit}/>);
+      
+      const usernameInput = screen.getByRole('textbox', {  name: /username/i});
+      userEvent.type(usernameInput, inputProps.username);
+
+
+      const passwordInput = screen.getByLabelText(/password/i);
+      userEvent.type(passwordInput, inputProps.password);
+
+      const submitButton = screen.getByRole('button');
+      userEvent.click(submitButton);
+
+      expect(submittedData).toStrictEqual(inputProps);
+    })
 })
