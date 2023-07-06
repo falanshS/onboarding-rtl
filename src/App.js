@@ -1,5 +1,5 @@
 import React from 'react';
-import nanoid from 'nanoid';
+// import nanoid from 'nanoid';
 
 export default class TodoList extends React.Component {
   state = {
@@ -17,7 +17,7 @@ export default class TodoList extends React.Component {
   };
 
   createTodo = () => {
-    const newTodo = { id: nanoid(), name: this.state.inputValue };
+    const newTodo = { id: Math.random(), name: this.state.inputValue };
     this.setState({ todos: [...this.state.todos, newTodo], inputValue: '' });
   };
 
