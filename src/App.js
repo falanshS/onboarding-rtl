@@ -26,11 +26,11 @@ export default class TodoList extends React.Component {
       <div data-testid="TodoList">
         <p data-testid="todoCount">{this.state.todos.length} todos</p>
         {this.state.todos.map((todo, i) => (
-          <div className="todo" data-testid="todo">
+          <div className="todo" data-testid={`todo-${i}`}>
             <span className="name">{todo.name}</span>
             <br />
             <button
-              data-testid="deleteButton"
+              data-testid={`deleteButton-${i}`}
               className="deleteButton"
               onClick={() => this.deleteTodo(todo.id)}
             >
