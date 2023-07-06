@@ -1,17 +1,41 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import userEvent from '@testing-library/user-event';
 
 describe('Tests for Counter App',()=>{
+    it('Render initial UI', () => {
+      render(<App />);
+      expect(screen.getByRole('button', {
+        name: /increment/i
+      })).toBeDefined();      
+      expect(screen.getByText(/0/i)).toBeDefined();
+      expect(screen.getByRole('button', {
+        name: /decrement/i
+      })).toBeDefined();
+    });
+
     it('Should have initial value 0', () => {
       render(<App />);
-      /** 
-       * Todo:
-       * 1. Assert that the initial value is 0. Use getBy/findBy Query to find text '0' from the screen.
-       * 2. use getByRole/findByRole query to find 'increment' button.
-       * 3. Use userEvent to click on increment button to increment the count by 1.
-       * 4. Assert that the count has value incremented by 1. i.e. the current value should become 1.
-       * 5. Similarly perform actions 3 and 4 for decrement.
-       * 
-      */
+      expect(screen.getByText(/0/i)).toBeDefined();
+    });
+
+    it('Increment should increase the value by 1', () => {
+      render(<App />);
+      const incrementButton = screen.getByRole('button', {
+        name: /increment/i
+      });
+      userEvent.click(incrementButton);
+      expect(screen.getByText(/1/i)).toBeDefined();
+    });
+
+    it('Decrement should decrease the value by 1', () => {
+      render(<App />);
+      const decrementButton = screen.getByRole('button', {
+        name: /decrement/i
+      });
+      userEvent.click(decrementButton);
+      expect(screen.getByText(/-1/i)).toBeDefined();
+      
     });
 })
