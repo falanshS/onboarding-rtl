@@ -1,24 +1,24 @@
-import React from 'react';
+import React from "react";
 // import nanoid from 'nanoid';
 
 export default class TodoList extends React.Component {
   state = {
     todos: [],
-    inputValue: '',
+    inputValue: "",
   };
 
-  setInputValue = event => {
+  setInputValue = (event) => {
     const { value } = event.target;
     this.setState({ inputValue: value });
   };
 
-  deleteTodo = id => {
-    this.setState({ todos: this.state.todos.filter(todo => todo.id !== id) });
+  deleteTodo = (id) => {
+    this.setState({ todos: this.state.todos.filter((todo) => todo.id !== id) });
   };
 
   createTodo = () => {
     const newTodo = { id: Math.random(), name: this.state.inputValue };
-    this.setState({ todos: [...this.state.todos, newTodo], inputValue: '' });
+    this.setState({ todos: [...this.state.todos, newTodo], inputValue: "" });
   };
 
   render() {
@@ -26,7 +26,7 @@ export default class TodoList extends React.Component {
       <div data-testid="TodoList">
         <p data-testid="todoCount">{this.state.todos.length} todos</p>
         {this.state.todos.map((todo, i) => (
-          <div className="todo" data-testid="todo">
+          <div className="todo" data-testid="todo" key={todo.id}>
             <span className="name">{todo.name}</span>
             <br />
             <button
