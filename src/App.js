@@ -1,14 +1,30 @@
-import React from 'react'
-function CounterApp() {
-  const [count,setCount] = React.useState(0);
+import * as React from 'react'
 
+function Login({onSubmit=()=>{}}) {
+  function handleSubmit(event) {
+    event.preventDefault()
+    const {username, password} = event.target.elements
+
+    onSubmit({
+      username: username.value,
+      password: password.value,
+    })
+  }
   return (
-    <div>
-      <button onClick={()=>setCount(c=>c+1)}>increment</button>
-      {count}
-      <button onClick={()=>setCount(c=>c-1)}>decrement</button>
-    </div>
-  );
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="username-field">Username</label>
+        <input id="username-field" name="username" type="text" />
+      </div>
+      <div>
+        <label htmlFor="password-field">Password</label>
+        <input id="password-field" name="password" type="password" />
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  )
 }
 
-export default CounterApp;
+export default Login;
