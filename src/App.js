@@ -1,14 +1,14 @@
-import * as React from 'react'
+import * as React from "react";
 
-function Login({onSubmit=()=>{}}) {
+function Login({ onSubmit = () => {} }) {
   function handleSubmit(event) {
-    event.preventDefault()
-    const {username, password} = event.target.elements
+    event.preventDefault();
+    const { username, password } = event.target.elements;
 
     onSubmit({
       username: username.value,
       password: password.value,
-    })
+    });
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -24,7 +24,7 @@ function Login({onSubmit=()=>{}}) {
         <button type="submit">Submit</button>
       </div>
     </form>
-  )
+  );
 }
 
 export default Login;
